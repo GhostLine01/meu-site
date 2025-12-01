@@ -2,26 +2,54 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Loading...</title>
+<title>01 Matrix</title>
 <style>
     body {
+        margin: 0;
         background: black;
         color: #00ff00;
         font-family: monospace;
-        text-align: center;
-        padding-top: 100px;
+        font-size: 20px;
+        white-space: pre;
+        overflow: hidden;
+    }
+    #erro404 {
+        display: none;
+        color: red;
         font-size: 40px;
+        text-align: center;
+        margin-top: 40vh;
     }
 </style>
 </head>
 <body>
-<div id="screen">01</div>
+
+<div id="matrix"></div>
+<div id="erro404">404 - Página não encontrada</div>
 
 <script>
-setTimeout(() => {
-    document.body.innerHTML =
-        "<h1 style='color:red; font-family: monospace;'>404 - Página não encontrada</h1>";
-}, 5000);
+    function gerar01() {
+        let texto = "";
+        for (let i = 0; i < 40; i++) {
+            for (let j = 0; j < 70; j++) {
+                texto += Math.random() > 0.5 ? "01 " : "10 ";
+            }
+            texto += "\n";
+        }
+        document.getElementById("matrix").textContent = texto;
+    }
+
+    // Efeito Matrix antes do 404
+    gerar01();
+    let efeito = setInterval(gerar01, 200);
+
+    // Após 2 segundos -> troca para erro 404
+    setTimeout(() => {
+        clearInterval(efeito);
+        document.getElementById("matrix").style.display = "none";
+        document.getElementById("erro404").style.display = "block";
+    }, 2000);
 </script>
+
 </body>
 </html>
